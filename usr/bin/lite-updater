@@ -9,6 +9,7 @@ import time
 import sys
 import os
 import pyinotify
+import notify2
 from threading import Thread
 pygtk.require('2.0')
 gtk.gdk.threads_init()
@@ -46,10 +47,14 @@ Exec=/usr/bin/lite-updater
 Terminal=false
 Categories=GTK;Utility;
 StartupNotify=true""")
+            n = notify2.Notification("Lite-Updater", "Autostart Enabled")
+            n.show()
         return True
 
     def uninstall(self):
         os.remove(self.user_autostart_path())
+        n = notify2.Notification("Lite-Updater", "Autostart Disabled")
+        n.show()
 
 
 class Liteupdater:
@@ -57,6 +62,7 @@ class Liteupdater:
     def __init__(self):
         self.icon = gtk.status_icon_new_from_file(inactive_icon)
         self.icon.set_tooltip("Idle")
+        notify2.init("Lite-updater")
         self.icon.set_visible(True)
 
         self.update_running = False
@@ -105,7 +111,7 @@ class Liteupdater:
         img4 = gtk.Image()
 
         about = gtk.ImageMenuItem('gtk-about', None)
-        updatechk = gtk.ImageMenuItem('Check for Updates')
+        updatechk = gtk.ImageMenuItem('Update Cache')
         img1.set_from_file(upgrade_icon)
         updatechk.set_image(img1)
         chsources = gtk.ImageMenuItem('Change Sources')
@@ -200,6 +206,8 @@ MA 02110-1301, USA. ''')
         icon = eval('{0}_icon'.format(state))
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
+        n = notify2.Notification("Lite-Updater", (self.tooltip_state[state]))
+        n.show()
 
     def checkapt(self):
 
