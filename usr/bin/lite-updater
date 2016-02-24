@@ -88,7 +88,7 @@ class Liteupdater:
         self.icon.connect('popup-menu', self.on_right_click)
 
     def update_cache(self, foo):
-        glib.spawn_async(["/usr/bin/gksu", "/usr/scripts/updates-cache"])
+        glib.spawn_async(["/usr/bin/lite-cache"])
 
     def on_left_click(self, foo):
         glib.spawn_async(["/usr/bin/gksu", "/usr/scripts/updates-gui"])
