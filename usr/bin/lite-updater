@@ -48,12 +48,18 @@ Terminal=false
 Categories=GTK;Utility;
 StartupNotify=true""")
             n = notify2.Notification("Lite-Updater", "Autostart Enabled")
+            nicon = gdk.pixbuf_new_from_file(inactive_icon)
+            n.set_icon_from_pixbuf(nicon)
+            n.set_timeout(1500)
             n.show()
         return True
 
     def uninstall(self):
         os.remove(self.user_autostart_path())
         n = notify2.Notification("Lite-Updater", "Autostart Disabled")
+        nicon = gdk.pixbuf_new_from_file(inactive_icon)
+        n.set_icon_from_pixbuf(nicon)
+        n.set_timeout(1500)
         n.show()
 
 
@@ -207,6 +213,9 @@ MA 02110-1301, USA. ''')
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
         n = notify2.Notification("Lite-Updater", (self.tooltip_state[state]))
+        nicon = gdk.pixbuf_new_from_file(inactive_icon)
+        n.set_icon_from_pixbuf(nicon)
+        n.set_timeout(1500)
         n.show()
 
     def checkapt(self):
