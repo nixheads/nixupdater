@@ -1,4 +1,4 @@
-##Lite-Update
+##Lite-Updater
 
 Designed for Linux Lite.
 
