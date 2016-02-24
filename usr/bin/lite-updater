@@ -29,7 +29,7 @@ class Autostart(object):
         if not os.path.exists(config_autostart_path):
             os.makedirs(config_autostart_path)
 
-        return config_autostart_path + "lite-update.desktop"
+        return config_autostart_path + "lite-updater.desktop"
 
     def is_installed(self):
         return os.path.exists(self.user_autostart_path())
