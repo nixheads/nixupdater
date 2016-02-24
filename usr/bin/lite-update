@@ -166,7 +166,7 @@ class Liteupdater:
         about_dialog.set_name('Lite Update')
         about_dialog.set_comments('A simple Lite update checker'
                                   ' for your tray.')
-        about_dialog.set_website('http://github.com/???')
+        about_dialog.set_website('https://github.com/linuxlite/lite-updater')
         about_dialog.set_website_label('Homepage')
         about_dialog.set_icon(gdk.pixbuf_new_from_file(upgrade_icon))
         about_dialog.set_logo(gdk.pixbuf_new_from_file(logo))
