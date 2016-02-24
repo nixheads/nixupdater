@@ -75,6 +75,9 @@ class Liteupdater:
         self.icon.connect('activate', self.on_left_click)
         self.icon.connect('popup-menu', self.on_right_click)
 
+    def update_cache(self, foo):
+        glib.spawn_async(["/usr/bin/gksu", "/usr/scripts/updates-cache"])
+
     def on_left_click(self, foo):
         glib.spawn_async(["/usr/bin/gksu", "/usr/scripts/updates-gui"])
 
@@ -115,7 +118,7 @@ class Liteupdater:
         quit = gtk.ImageMenuItem('gtk-quit', None)
 
         about.connect('activate', self.show_about_dialog)
-        updatechk.connect('activate', self.update)
+        updatechk.connect('activate', self.update_cache)
         chsources.connect('activate', self.checksources)
         installupdate.connect('activate', self.on_left_click)
         refresh.connect('activate', self.update)
