@@ -73,7 +73,7 @@ class ConfWindow(Gtk.Window):
         self.spinbutton2.set_update_policy(policy)
         self.spinbutton2.set_value(delaytwovalue)
 
-        self.label7 = Gtk.Label("show notifications when system is up to date", xalign=0)
+        self.label7 = Gtk.Label("show event notifications", xalign=0)
         self.check = Gtk.CheckButton()
         if config[2] == "True":
             self.check.set_active(True)
@@ -85,18 +85,18 @@ class ConfWindow(Gtk.Window):
         self.check.connect("toggled", self.checksig)
 
         if Autostart().is_installed():
-            self.button3 = Gtk.Button("Disable Autostart", image=Gtk.Image(stock=Gtk.STOCK_REMOVE))
+            self.button3 = Gtk.Button("Disable Autostart",image=Gtk.Image(stock=Gtk.STOCK_REMOVE))
         else:
-            self.button3 = Gtk.Button("Enable Autostart", image=Gtk.Image(stock=Gtk.STOCK_ADD))
+            self.button3 = Gtk.Button("Enable Autostart",image=Gtk.Image(stock=Gtk.STOCK_ADD))
         self.button3.connect("clicked", self.autostart)
 
-        self.button4 = Gtk.Button("Restore Defaults", image=Gtk.Image(stock=Gtk.STOCK_REFRESH))
+        self.button4 = Gtk.Button("Restore Defaults",image=Gtk.Image(stock=Gtk.STOCK_REFRESH))
         self.button4.connect("clicked", self.default)
 
-        self.button5 = Gtk.Button("Cancel", image=Gtk.Image(stock=Gtk.STOCK_CANCEL))
+        self.button5 = Gtk.Button("Cancel",image=Gtk.Image(stock=Gtk.STOCK_CANCEL))
         self.button5.connect("clicked", self.cancel)
 
-        self.button6 = Gtk.Button("Apply", image=Gtk.Image(stock=Gtk.STOCK_APPLY))
+        self.button6 = Gtk.Button("Apply",image=Gtk.Image(stock=Gtk.STOCK_APPLY))
         self.button6.connect("clicked", self.apply)
 
         grid.attach(self.label1, 0, 0, 2, 1)
