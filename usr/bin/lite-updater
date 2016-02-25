@@ -21,46 +21,13 @@ upgrade_icon = iconpath + 'software-update-available-symbolic.svg'
 essential_icon = iconpath + 'software-update-urgent-symbolic.svg'
 logo = '/usr/share/litecc/frontend/images/lite_logo.png'
 
-
-class Autostart(object):
-
-    def user_autostart_path(self):
-        config_autostart_path = os.getenv("HOME") + "/.config/autostart/"
-
-        if not os.path.exists(config_autostart_path):
-            os.makedirs(config_autostart_path)
-
-        return config_autostart_path + "lite-updater.desktop"
-
-    def is_installed(self):
-        return os.path.exists(self.user_autostart_path())
-
-    def install(self):
-        with open(self.user_autostart_path(), "w") as desktop_file:
-            desktop_file.write("""[Desktop Entry]
-Type=Application
-Version=0.1
-Name=Lite-Updater
-GenericName=Lite-Updater
-Comment=Linux Lite Update Checker
-Exec=/usr/bin/lite-updater
-Terminal=false
-Categories=GTK;Utility;
-StartupNotify=true""")
-            n = notify2.Notification("Lite-Updater", "Autostart Enabled")
-            nicon = gdk.pixbuf_new_from_file(inactive_icon)
-            n.set_icon_from_pixbuf(nicon)
-            n.set_timeout(1500)
-            n.show()
-        return True
-
-    def uninstall(self):
-        os.remove(self.user_autostart_path())
-        n = notify2.Notification("Lite-Updater", "Autostart Disabled")
-        nicon = gdk.pixbuf_new_from_file(inactive_icon)
-        n.set_icon_from_pixbuf(nicon)
-        n.set_timeout(1500)
-        n.show()
+config = []
+try:
+    for line in open(os.path.expanduser("~") + '/.config' + '/lite-updater.conf'):
+        line = line.rstrip()
+        config.append(line)
+except:
+    config = ["3600", "1500",  "True"]
 
 
 class Liteupdater:
@@ -96,17 +63,9 @@ class Liteupdater:
     def checksources(self, foo):
         glib.spawn_async(["/usr/bin/gksu", "/usr/bin/software-properties-gtk"])
 
-    def doauto_start(self, foo):
-        if Autostart().is_installed():
-            pass
-        else:
-            Autostart().install()
+    def doconfig(self, foo):
+        glib.spawn_async(["/usr/bin/lite-updater-config"])
 
-    def doauto_remove(self, foo):
-        if Autostart().is_installed():
-            Autostart().uninstall()
-        else:
-            pass
 
     def on_right_click(self, icon, button, time):
         menu = gtk.Menu()
@@ -147,18 +106,10 @@ class Liteupdater:
         sep1 = gtk.SeparatorMenuItem()
         menu.append(sep1)
         menu.append(about)
-
-        if Autostart().is_installed():
-            enableauto = gtk.ImageMenuItem('Disable Auto-Start')
-            img4.set_from_file(essential_icon)
-            enableauto.set_image(img4)
-            enableauto.connect('activate', self.doauto_remove)
-        else:
-            enableauto = gtk.ImageMenuItem('Enable Auto-Start')
-            img4.set_from_file(upgrade_icon)
-            enableauto.set_image(img4)
-            enableauto.connect('activate', self.doauto_start)
-
+        enableauto = gtk.ImageMenuItem('Configuration')
+        img4.set_from_file(upgrade_icon)
+        enableauto.set_image(img4)
+        enableauto.connect('activate', self.doconfig)
         menu.append(enableauto)
         sep2 = gtk.SeparatorMenuItem()
         menu.append(sep2)
@@ -212,11 +163,14 @@ MA 02110-1301, USA. ''')
         icon = eval('{0}_icon'.format(state))
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
-        n = notify2.Notification("Lite-Updater", (self.tooltip_state[state]))
-        nicon = gdk.pixbuf_new_from_file(inactive_icon)
-        n.set_icon_from_pixbuf(nicon)
-        n.set_timeout(1500)
-        n.show()
+        if config[2] == "True":
+            n = notify2.Notification("Lite-Updater", (self.tooltip_state[state]))
+            nicon = gdk.pixbuf_new_from_file(inactive_icon)
+            n.set_icon_from_pixbuf(nicon)
+            n.set_timeout(int(config[1]))
+            n.show()
+        elif config[2] == "False":
+            pass
 
     def checkapt(self):
 
@@ -290,7 +244,7 @@ MA 02110-1301, USA. ''')
     def timer_update(self):
         while True:
             self.update()
-            time.sleep(3600)
+            time.sleep(int(config[0]))
 
     def main(self):
         wm = pyinotify.WatchManager()
