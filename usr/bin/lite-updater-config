@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+
 import os
 from os.path import expanduser
 from gi.repository import Gtk
@@ -64,7 +65,7 @@ class ConfWindow(Gtk.Window):
         self.spinbutton1.set_update_policy(policy)
         self.spinbutton1.set_value(delayonevalue)
 
-        self.label2 = Gtk.Label("notifcation display duration (in milseconds)", xalign=0)
+        self.label2 = Gtk.Label("notifcation display duration (in milliseconds)", xalign=0)
         adjustment = Gtk.Adjustment(0, 0, 999999999, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
         delaytwovalue = eval(config[1])
@@ -111,10 +112,10 @@ class ConfWindow(Gtk.Window):
         grid.attach(self.button6, 3, 7, 1, 1)
 
     def checksig(self, configalter):
-        if self.check.get_active() == True:
+        if self.check.get_active() is not True:
             self.spinbutton2.set_sensitive(True)
 
-        elif self.check.get_active() == False:
+        elif self.check.get_active() is not False:
             self.spinbutton2.set_sensitive(False)
 
     def doauto_start(self, foo):
