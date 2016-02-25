@@ -56,7 +56,7 @@ class ConfWindow(Gtk.Window):
         grid = Gtk.Grid(column_homogeneous=True, column_spacing=4, row_spacing=4)
         self.add(grid)
 
-        self.label1 = Gtk.Label("update checking interval (in seconds)", xalign=0)
+        self.label1 = Gtk.Label("Update checking interval (in seconds).", xalign=0)
         adjustment = Gtk.Adjustment(0, 0, 999999999, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
         delayonevalue = eval(config[0])
@@ -65,7 +65,7 @@ class ConfWindow(Gtk.Window):
         self.spinbutton1.set_update_policy(policy)
         self.spinbutton1.set_value(delayonevalue)
 
-        self.label2 = Gtk.Label("notifcation display duration (in milliseconds)", xalign=0)
+        self.label2 = Gtk.Label("Notifcation display duration (in milliseconds).", xalign=0)
         adjustment = Gtk.Adjustment(0, 0, 999999999, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
         delaytwovalue = eval(config[1])
@@ -74,7 +74,7 @@ class ConfWindow(Gtk.Window):
         self.spinbutton2.set_update_policy(policy)
         self.spinbutton2.set_value(delaytwovalue)
 
-        self.label7 = Gtk.Label("show event notifications", xalign=0)
+        self.label7 = Gtk.Label("Show event notifications.", xalign=0)
         self.check = Gtk.CheckButton()
         if config[2] == "True":
             self.check.set_active(True)
