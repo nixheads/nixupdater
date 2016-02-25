@@ -211,6 +211,7 @@ MA 02110-1301, USA. ''')
 
     def update(self, ev=None):
         if self.update_running is False:
+            self.count_update()
             self.update_running = True
             self.set_state('working')
             pkglist = self.checkapt()
