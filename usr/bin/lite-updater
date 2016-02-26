@@ -63,8 +63,12 @@ class Liteupdater:
         self.icon.connect('activate', self.on_left_click)
         self.icon.connect('popup-menu', self.on_right_click)
 
-    def update_cache(self, foo):
-        glib.spawn_async(["/usr/bin/lite-cache"])
+    def update_cache(self, foo=None):
+        self.set_state('working')
+        cmd = "/usr/bin/lite-cache-check"
+        process = Popen(shlex.split(cmd), stdout=PIPE)
+        process.communicate()
+        self.update()
 
     def on_left_click(self, foo):
         glib.spawn_async(["/usr/bin/gksu", "/usr/scripts/updates-gui"])
@@ -256,7 +260,7 @@ MA 02110-1301, USA. ''')
 
     def timer_update(self):
         while True:
-            self.update()
+            self.update_cache()
             time.sleep(int(config[0]))
 
     def main(self):
