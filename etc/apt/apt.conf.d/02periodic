@@ -1,5 +1,0 @@
-// Enable the update/upgrade script (0=disable)
-APT::Periodic::Enable "1";
-
-// Do "apt-get update" automatically every n-days (0=disable)
-APT::Periodic::Update-Package-Lists "1";

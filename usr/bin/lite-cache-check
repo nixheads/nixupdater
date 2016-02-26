@@ -3,8 +3,5 @@ from aptdaemon import client
 
 apt_client = client.AptClient()
 transaction = apt_client.update_cache()
-
-
-
 transaction.run()
 apt_client.update_cache(wait=True)
