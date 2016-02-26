@@ -109,17 +109,8 @@ class Liteupdater:
         installupdate.connect('activate', self.on_left_click)
         refresh.connect('activate', self.update)
         quit.connect('activate', self.quit)
-        titleMenuItem = gtk.ImageMenuItem()
-        title = gtk.Label()
-        title.set_text("<span foreground=\"grey\">" +
-                       ("Lite Updater") + "</span>")
-        title.set_justify(gtk.JUSTIFY_LEFT)
-        title.set_alignment(0, 0.5)
-        title.set_use_markup(True)
-        titleMenuItem.add(title)
-        menu.append(titleMenuItem)
-        sep1 = gtk.SeparatorMenuItem()
-        menu.append(sep1)
+
+
         menu.append(about)
         enableauto = gtk.ImageMenuItem('Configuration')
         img4.set_from_file(upgrade_icon)
