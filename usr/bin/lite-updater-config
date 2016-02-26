@@ -6,7 +6,8 @@ from gi.repository import Gtk
 
 config = []
 try:
-    for line in open(os.path.expanduser("~") + '/.config' + '/lite-updater.conf'):
+    for line in open(os.path.expanduser("~") + '/.config' +
+                     '/lite-updater.conf'):
         line = line.rstrip()
         config.append(line)
 except:
@@ -53,36 +54,37 @@ class ConfWindow(Gtk.Window):
         self.set_position(Gtk.WindowPosition.CENTER)
         self.set_icon_from_file(
             '/usr/share/icons/Faenza/status/scalable/starred-symbolic.svg')
-        grid = Gtk.Grid(column_homogeneous=True, column_spacing=4, row_spacing=5)
+        grid = Gtk.Grid(column_homogeneous=True, column_spacing=4,
+                        row_spacing=5)
         self.add(grid)
 
-        self.label1 = Gtk.Label("Update checking interval (in minutes).", xalign=0)
+        self.label1 = Gtk.Label("Update checking interval (in minutes).",
+                                xalign=0)
         adjustment = Gtk.Adjustment(0, 5, 59, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
-        retime = (int(config[0])  / 60)
+        retime = (int(config[0]) / 60)
         delayonevalue = retime
         self.spinbutton1 = Gtk.SpinButton()
         self.spinbutton1.set_adjustment(adjustment)
         self.spinbutton1.set_update_policy(policy)
         self.spinbutton1.set_value(delayonevalue)
 
-
-        self.label2 = Gtk.Label("Update checking interval (in hours).", xalign=0)
+        self.label2 = Gtk.Label("Update checking interval (in hours).",
+                                xalign=0)
         adjustment = Gtk.Adjustment(0, 0, 23, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
-        retime = (int(config[1])  / 60 / 60)
+        retime = (int(config[1]) / 60 / 60)
         delaytwovalue = retime
         self.spinbutton2 = Gtk.SpinButton()
         self.spinbutton2.set_adjustment(adjustment)
         self.spinbutton2.set_update_policy(policy)
         self.spinbutton2.set_value(delaytwovalue)
 
-
-
-        self.label3 = Gtk.Label("Notifcation display duration (in seconds).", xalign=0)
+        self.label3 = Gtk.Label("Notifcation display duration (in seconds).",
+                                xalign=0)
         adjustment = Gtk.Adjustment(0, 1, 60, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
-        retime = (int(config[2])  / 1000)
+        retime = (int(config[2]) / 1000)
         delaythreevalue = retime
         self.spinbutton3 = Gtk.SpinButton()
         self.spinbutton3.set_adjustment(adjustment)
@@ -101,18 +103,23 @@ class ConfWindow(Gtk.Window):
         self.check.connect("toggled", self.checksig)
 
         if Autostart().is_installed():
-            self.button3 = Gtk.Button("Disable Autostart", image=Gtk.Image(stock=Gtk.STOCK_REMOVE))
+            self.button3 = Gtk.Button("Disable Autostart",
+                                      image=Gtk.Image(stock=Gtk.STOCK_REMOVE))
         else:
-            self.button3 = Gtk.Button("Enable Autostart", image=Gtk.Image(stock=Gtk.STOCK_ADD))
+            self.button3 = Gtk.Button("Enable Autostart",
+                                      image=Gtk.Image(stock=Gtk.STOCK_ADD))
         self.button3.connect("clicked", self.autostart)
 
-        self.button4 = Gtk.Button("Restore Defaults", image=Gtk.Image(stock=Gtk.STOCK_REFRESH))
+        self.button4 = Gtk.Button("Restore Defaults",
+                                  image=Gtk.Image(stock=Gtk.STOCK_REFRESH))
         self.button4.connect("clicked", self.default)
 
-        self.button5 = Gtk.Button("Cancel", image=Gtk.Image(stock=Gtk.STOCK_CANCEL))
+        self.button5 = Gtk.Button("Cancel",
+                                  image=Gtk.Image(stock=Gtk.STOCK_CANCEL))
         self.button5.connect("clicked", self.cancel)
 
-        self.button6 = Gtk.Button("Apply", image=Gtk.Image(stock=Gtk.STOCK_APPLY))
+        self.button6 = Gtk.Button("Apply",
+                                  image=Gtk.Image(stock=Gtk.STOCK_APPLY))
         self.button6.connect("clicked", self.apply)
 
         grid.attach(self.label1, 0, 0, 2, 1)
@@ -161,7 +168,8 @@ class ConfWindow(Gtk.Window):
 
     def default(self, button):
         config = ["30", "1", "1500",  "True"]
-        configfile = open(os.path.expanduser("~") + '/.config' + '/lite-updater.conf', "w")
+        configfile = open(os.path.expanduser("~") + '/.config' +
+                          '/lite-updater.conf', "w")
         for item in config:
             configfile.write("%s\n" % item)
         self.spinbutton1.set_value(30)
@@ -181,7 +189,8 @@ class ConfWindow(Gtk.Window):
         config[2] = dseconds * 1000
         config[3] = self.check.get_active()
 
-        configfile = open(os.path.expanduser("~") + '/.config' + '/lite-updater.conf', "w")
+        configfile = open(os.path.expanduser("~") + '/.config' +
+                          '/lite-updater.conf', "w")
         for item in config:
             configfile.write("%s\n" % item)
         Gtk.main_quit()
