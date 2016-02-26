@@ -10,6 +10,7 @@ import apt
 import time
 import sys
 import os
+import gc
 import pyinotify
 import notify2
 from threading import Thread
@@ -68,6 +69,7 @@ class Liteupdater:
         process = Popen(shlex.split(cmd), stdout=PIPE)
         process.communicate()
         self.update()
+        gc.collect()
 
     def on_left_click(self, foo):
         glib.spawn_async(["/usr/bin/gksu", "/usr/scripts/updates-gui"])
@@ -218,6 +220,7 @@ MA 02110-1301, USA. ''')
             self.set_state(state)
 
         self.update_running = False
+        gc.collect()
 
     def count_update(self):
 
@@ -250,6 +253,7 @@ MA 02110-1301, USA. ''')
         while True:
             self.update_cache()
             self.count_update()
+            gc.collect()
             time.sleep(int(config[0] + config[1]))
 
     def main(self):
