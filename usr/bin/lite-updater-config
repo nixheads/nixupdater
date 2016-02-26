@@ -131,10 +131,10 @@ class ConfWindow(Gtk.Window):
         grid.attach(self.button6, 3, 7, 1, 1)
 
     def checksig(self, configalter):
-        if self.check.get_active() is not True:
+        if self.check.get_active() is True:
             self.spinbutton3.set_sensitive(True)
 
-        elif self.check.get_active() is not False:
+        elif self.check.get_active() is False:
             self.spinbutton3.set_sensitive(False)
 
     def doauto_start(self, foo):
@@ -153,9 +153,11 @@ class ConfWindow(Gtk.Window):
         if Autostart().is_installed():
             self.doauto_remove(button)
             self.button3.set_label("Enable Autostart")
+            self.button3.set_image(image=Gtk.Image(stock=Gtk.STOCK_ADD))
         else:
             self.doauto_start(button)
             self.button3.set_label("Disable Autostart")
+            self.button3.set_image(image=Gtk.Image(stock=Gtk.STOCK_REMOVE))
 
     def default(self, button):
         config = ["30", "1", "1500",  "True"]
