@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-from os.path import expanduser
 from gi.repository import Gtk
 
 config = []
