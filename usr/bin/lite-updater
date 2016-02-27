@@ -20,6 +20,7 @@ gtk.gdk.threads_init()
 iconpath = '/usr/share/icons/Faenza/status/scalable/'
 inactive_icon = iconpath + 'starred-symbolic.svg'
 working_icon = iconpath + 'appointment-soon.svg'
+cache_icon = iconpath + 'appointment-soon.svg'
 upgrade_icon = iconpath + 'software-update-available-symbolic.svg'
 essential_icon = iconpath + 'software-update-urgent-symbolic.svg'
 logo = '/usr/share/litecc/frontend/images/lite_logo.png'
@@ -57,14 +58,15 @@ class Liteupdater:
             'essential': 'Urgent updates available' +
             " " + str(self.count_update()),
             'inactive': 'No updates available',
-            'working': 'Operations in progress'
+            'working': 'Operations in progress',
+            'cache': 'Updating package cache'
         }
 
         self.icon.connect('activate', self.on_left_click)
         self.icon.connect('popup-menu', self.on_right_click)
 
     def update_cache(self, foo=None):
-        self.set_state('working')
+        self.set_state('cache')
         cmd = "/usr/bin/lite-cache-check"
         process = Popen(shlex.split(cmd), stdout=PIPE)
         process.communicate()
