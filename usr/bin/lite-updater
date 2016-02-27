@@ -168,6 +168,7 @@ MA 02110-1301, USA. ''')
         sys.exit(0)
 
     def set_state(self, state):
+        self.count_update()
         icon = eval('{0}_icon'.format(state))
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
@@ -203,7 +204,7 @@ MA 02110-1301, USA. ''')
                     'essential': chosen_package.essential
                 }
                 list_pkgs.append(pkg)
-                del chosen_package
+
 
         return list_pkgs
         gc.collect()
@@ -231,21 +232,15 @@ MA 02110-1301, USA. ''')
 
         count = [0]
 
-        try:
-            apt_cache = apt.Cache()
-        except:
-            return count
+        apt_cache = apt.Cache()
+        upgradable = filter(lambda p: p.is_upgradable, apt_cache)
 
-        apt_cache.open()
-
-        for package_name in list(apt_cache.keys()):
-            chosen_package = apt_cache[package_name]
-
-            if chosen_package.is_upgradable:
-                count[0] += 1
+        for pkg in upgradable:
+              count[0] += 1
 
         return count
-        del apt_cache
+
+
 
     def timer_update(self):
         while True:
