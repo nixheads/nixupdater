@@ -228,13 +228,12 @@ MA 02110-1301, USA. ''')
 
     def count_update(self):
 
-        list_pkgs = []
         count = [0]
 
         try:
             apt_cache = apt.Cache()
-        except SystemError:
-            return list_pkgs
+        except:
+            return count
 
         apt_cache.open()
 
@@ -242,21 +241,14 @@ MA 02110-1301, USA. ''')
             chosen_package = apt_cache[package_name]
 
             if chosen_package.is_upgradable:
-                pkg = {
-                    'name': chosen_package.name,
-                    'version': chosen_package.installed.version,
-                    'candidate': chosen_package.candidate.version,
-                    'essential': chosen_package.essential
-                }
-                list_pkgs.append(pkg)
                 count[0] += 1
 
         return count
+        del apt_cache
 
     def timer_update(self):
         while True:
             self.update_cache()
-            self.count_update()
             gc.collect()
             time.sleep(int(config[0] + config[1]))
 
