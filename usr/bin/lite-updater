@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# vim:fenc=utf-8
+#
+# Copyright © 2016 Johnathan "Shaggytwodope" Jenkins <twodopeshaggy@gmail.com>
+#
+# Distributed under terms of the GPL2 license.
 
 import shlex
 from subprocess import Popen, PIPE
@@ -225,8 +231,6 @@ MA 02110-1301, USA. ''')
 
         self.update_running = False
 
-
-
     def count_update(self):
 
         count = [0]
@@ -235,11 +239,9 @@ MA 02110-1301, USA. ''')
         upgradable = filter(lambda p: p.is_upgradable, apt_cache)
 
         for pkg in upgradable:
-              count[0] += 1
+            count[0] += 1
 
         return count
-
-
 
     def timer_update(self):
         while True:
