@@ -204,6 +204,7 @@ MA 02110-1301, USA. ''')
                 }
                 list_pkgs.append(pkg)
                 del chosen_package
+                del apt_cache
 
         return list_pkgs
 
@@ -223,6 +224,8 @@ MA 02110-1301, USA. ''')
             self.set_state(state)
 
         self.update_running = False
+        self.count_update()
+        gc.collect()
 
     def count_update(self):
 
@@ -249,6 +252,8 @@ MA 02110-1301, USA. ''')
                 list_pkgs.append(pkg)
                 count[0] += 1
                 del chosen_package
+                del list_pkgs
+                del apt_cache
 
         return count
 
