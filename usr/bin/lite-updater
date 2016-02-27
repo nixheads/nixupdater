@@ -41,7 +41,7 @@ def get_global_config():
             line = line.rstrip()
             config.append(line)
     except:
-        config = ["1800", "3600", "3000",  "True"]
+        config = ["1800", "3600", "3000", "True"]
     return config
 
 
@@ -62,7 +62,7 @@ class Liteupdater:
         self.tooltip_state = {
             'upgrade': 'Updates available' + " " + str(self.count_update()),
             'essential': 'Urgent updates available' +
-            " " + str(self.count_update()),
+                         " " + str(self.count_update()),
             'inactive': 'No updates available',
             'working': 'Operations in progress',
             'cache': 'Updating package cache'
@@ -209,7 +209,6 @@ MA 02110-1301, USA. ''')
                     'essential': chosen_package.essential
                 }
                 list_pkgs.append(pkg)
-
 
         return list_pkgs
         gc.collect()
