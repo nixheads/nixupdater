@@ -10,7 +10,7 @@ try:
         line = line.rstrip()
         config.append(line)
 except:
-    config = ["30", "1", "3",  "True"]
+    config = ["1800", "3600", "3000",  "True"]
 
 
 class Autostart(object):
@@ -166,7 +166,7 @@ class ConfWindow(Gtk.Window):
             self.button3.set_image(image=Gtk.Image(stock=Gtk.STOCK_REMOVE))
 
     def default(self, button):
-        config = ["30", "1", "3",  "True"]
+        config = ["1800", "3600", "3000",  "True"]
         configfile = open(os.path.expanduser("~") + '/.config' +
                           '/lite-updater.conf', "w")
         for item in config:
@@ -175,6 +175,7 @@ class ConfWindow(Gtk.Window):
         self.spinbutton2.set_value(1)
         self.spinbutton3.set_value(3)
         self.check.set_active(True)
+        self.apply
 
     def cancel(self, button):
         Gtk.main_quit()
