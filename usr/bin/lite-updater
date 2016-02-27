@@ -168,7 +168,6 @@ MA 02110-1301, USA. ''')
         sys.exit(0)
 
     def set_state(self, state):
-        self.count_update()
         icon = eval('{0}_icon'.format(state))
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
@@ -225,7 +224,7 @@ MA 02110-1301, USA. ''')
             self.set_state(state)
 
         self.update_running = False
-        self.count_update()
+
         gc.collect()
 
     def count_update(self):
@@ -245,6 +244,7 @@ MA 02110-1301, USA. ''')
     def timer_update(self):
         while True:
             self.update_cache()
+            self.count_update()
             gc.collect()
             time.sleep(int(config[0] + config[1]))
 
