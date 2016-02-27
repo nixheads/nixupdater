@@ -204,7 +204,6 @@ MA 02110-1301, USA. ''')
                 }
                 list_pkgs.append(pkg)
                 del chosen_package
-                del apt_cache
 
         return list_pkgs
 
@@ -251,9 +250,6 @@ MA 02110-1301, USA. ''')
                 }
                 list_pkgs.append(pkg)
                 count[0] += 1
-                del chosen_package
-                del list_pkgs
-                del apt_cache
 
         return count
 
