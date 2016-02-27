@@ -225,7 +225,7 @@ MA 02110-1301, USA. ''')
 
         self.update_running = False
 
-        gc.collect()
+
 
     def count_update(self):
 
@@ -244,7 +244,6 @@ MA 02110-1301, USA. ''')
     def timer_update(self):
         while True:
             self.update_cache()
-            self.count_update()
             gc.collect()
             time.sleep(int(config[0] + config[1]))
 
