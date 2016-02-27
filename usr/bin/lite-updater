@@ -221,7 +221,6 @@ MA 02110-1301, USA. ''')
             self.set_state(state)
 
         self.update_running = False
-        gc.collect()
 
     def count_update(self):
 
