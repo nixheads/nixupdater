@@ -206,6 +206,7 @@ MA 02110-1301, USA. ''')
                 del chosen_package
 
         return list_pkgs
+        gc.collect()
 
     def update(self, ev=None):
         if self.update_running is False:
