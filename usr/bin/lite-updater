@@ -262,7 +262,7 @@ MA 02110-1301, USA. ''')
         t = Thread(target=self.timer_update)
         t.daemon = True
         t.start()
-
+        gc.collect()
         gtk.main()
 
 if __name__ == "__main__":
