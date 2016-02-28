@@ -64,8 +64,8 @@ class Liteupdater:
             'essential': 'Important Updates Available' +
                          " " + str(self.count_update()),
             'inactive': 'No Updates Available',
-            'working': 'Operations In Progress',
-            'cache': 'Updating Package Cache'
+            'working': 'Operations In Progress\nPlease wait...',
+            'cache': 'Updating Package Cache\nPlease wait...'
         }
 
         self.icon.connect('activate', self.on_left_click)
