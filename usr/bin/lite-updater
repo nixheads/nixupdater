@@ -26,7 +26,7 @@ gtk.gdk.threads_init()
 iconpath = '/usr/share/icons/Faenza/status/scalable/'
 inactive_icon = iconpath + 'starred-symbolic.svg'
 working_icon = iconpath + 'appointment-soon.svg'
-cache_icon = iconpath + 'software-update-urgent-symbolic.svg'
+cache_icon = iconpath + 'aptdaemon-upgrade.svg'
 upgrade_icon = iconpath + 'software-update-available-symbolic.svg'
 essential_icon = iconpath + 'software-update-urgent-symbolic.svg'
 logo = '/usr/share/litecc/frontend/images/lite_logo.png'
@@ -211,6 +211,7 @@ MA 02110-1301, USA. ''')
                 list_pkgs.append(pkg)
 
         return list_pkgs
+        apt_cache.close()
         gc.collect()
 
     def update(self, ev=None):
@@ -229,6 +230,7 @@ MA 02110-1301, USA. ''')
             self.set_state(state)
 
         self.update_running = False
+        gc.collect()
 
     def count_update(self):
 
@@ -240,6 +242,7 @@ MA 02110-1301, USA. ''')
         for pkg in upgradable:
             count[0] += 1
 
+        apt_cache.close()
         return count
 
     def timer_update(self):
