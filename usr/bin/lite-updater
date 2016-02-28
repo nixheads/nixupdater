@@ -233,17 +233,9 @@ MA 02110-1301, USA. ''')
         gc.collect()
 
     def count_update(self):
-
-        count = [0]
-
-        apt_cache = apt.Cache()
-        upgradable = filter(lambda p: p.is_upgradable, apt_cache)
-
-        for pkg in upgradable:
-            count[0] += 1
-
-        apt_cache.close()
-        return count
+        apt_cache =  self.checkapt()
+        upgradable = [p for p in apt_cache]
+        return len(upgradable)
 
     def timer_update(self):
         while True:
