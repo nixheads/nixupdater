@@ -60,9 +60,9 @@ class Liteupdater:
         self.watchdir = '/var/lib/apt'
 
         self.tooltip_state = {
-            'upgrade': 'Updates Available' + " " + str(self.count_update()),
+            'upgrade': 'Updates Available' + " " + str(len(self.checkapt())),
             'essential': 'Important Updates Available' +
-                         " " + str(self.count_update()),
+                         " " + str(len(self.checkapt())),
             'inactive': 'No Updates Available',
             'working': 'Operations In Progress\nPlease wait...',
             'cache': 'Updating Package Cache\nPlease wait...'
@@ -232,10 +232,6 @@ MA 02110-1301, USA. ''')
         self.update_running = False
         gc.collect()
 
-    def count_update(self):
-        apt_cache =  self.checkapt()
-        upgradable = [p for p in apt_cache]
-        return len(upgradable)
 
     def timer_update(self):
         while True:
