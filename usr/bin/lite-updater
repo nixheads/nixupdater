@@ -24,11 +24,11 @@ pygtk.require('2.0')
 gtk.gdk.threads_init()
 
 iconpath = '/usr/share/lite-updater/icons/'
-inactive_icon = iconpath + 'updates-idle.svg'
-working_icon = iconpath + 'aptdaemon-working.svg'
-cache_icon = iconpath + 'cache-icon.svg'
-upgrade_icon = iconpath + 'updates-available.svg'
-essential_icon = iconpath + 'updates-available.svg'
+inactive_icon = iconpath + 'updates-idle.png'
+working_icon = iconpath + 'aptdaemon-working.png'
+cache_icon = iconpath + 'cache-icon.png'
+upgrade_icon = iconpath + 'updates-available.png'
+essential_icon = iconpath + 'updates-available.png'
 logo =  iconpath + 'lite_logo.png'
 
 
