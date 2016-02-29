@@ -180,7 +180,7 @@ MA 02110-1301, USA. ''')
         if config[3] == "True":
             n = notify2.Notification("Lite-Updater",
                                      (self.tooltip_state[state]))
-            nicon = gdk.pixbuf_new_from_file(inactive_icon)
+            nicon = gdk.pixbuf_new_from_file(icon)
             n.set_icon_from_pixbuf(nicon)
             n.set_timeout(int(config[2]))
             n.show()
