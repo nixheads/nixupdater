@@ -101,10 +101,10 @@ class Liteupdater:
 
         about = gtk.ImageMenuItem('gtk-about', None)
         updatechk = gtk.ImageMenuItem('Update Cache')
-        img1.set_from_file(upgrade_icon)
+        img1.set_from_file(cache_icon)
         updatechk.set_image(img1)
         chsources = gtk.ImageMenuItem('Change Sources')
-        img2.set_from_file(inactive_icon)
+        img2.set_from_file(working_icon)
         chsources.set_image(img2)
         installupdate = gtk.ImageMenuItem('Install Updates')
         img3.set_from_file(essential_icon)
@@ -121,7 +121,7 @@ class Liteupdater:
 
         menu.append(about)
         enableauto = gtk.ImageMenuItem('Configuration')
-        img4.set_from_file(upgrade_icon)
+        img4.set_from_file(working_icon)
         enableauto.set_image(img4)
         enableauto.connect('activate', self.doconfig)
         menu.append(enableauto)
