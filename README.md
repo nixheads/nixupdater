@@ -7,5 +7,11 @@ Current depends required to run are:
 - ``python-apt``
 - ``python-pyinotify``
 - ``python-notify2``
+- ``python-aptdaemon``
+
+
+
+##Credits
+
 
 
