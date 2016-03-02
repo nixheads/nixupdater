@@ -7,6 +7,7 @@
 # Distributed under terms of the GPL2 license.
 
 import shlex
+import fcntl
 from subprocess import Popen, PIPE
 import pygtk
 import gtk
@@ -22,17 +23,18 @@ import notify2
 from threading import Thread
 pygtk.require('2.0')
 gtk.gdk.threads_init()
-import fcntl
 
 
-fl=0
+fl = 0
+
+
 def run_check():
     global fl
-    fl=open(os.path.realpath(__file__),'r')
+    fl = open(os.path.realpath(__file__), 'r')
     try:
-        fcntl.flock(fl,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        fcntl.flock(fl, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except:
-        sys.exit (0)
+        sys.exit(0)
 
 
 iconpath = '/usr/share/lite-updater/icons/'
@@ -41,7 +43,7 @@ working_icon = iconpath + 'aptdaemon-working.png'
 cache_icon = iconpath + 'cache-icon.png'
 upgrade_icon = iconpath + 'updates-available.png'
 essential_icon = iconpath + 'updates-available.png'
-logo =  iconpath + 'lite_logo.png'
+logo = iconpath + 'lite_logo.png'
 
 
 def get_global_config():
@@ -57,6 +59,20 @@ def get_global_config():
     return config
 
 
+def checkcount():
+    global upgrades
+    cache = apt.Cache()
+    cache.close()
+    cache.open()
+    upgrades = 0
+    cache.upgrade(dist_upgrade=True)
+    changes = cache.get_changes()
+    if changes:
+        counter = [change.name for change in changes]
+        upgrades = (len(counter))
+    return upgrades
+
+
 class Liteupdater:
 
     def __init__(self):
@@ -65,21 +81,10 @@ class Liteupdater:
         self.icon.set_tooltip("Idle")
         notify2.init("Lite-updater")
         self.icon.set_visible(True)
-
         self.update_running = False
-
         self.notifier = None
         self.watchdir = '/var/lib/apt'
-
-        self.tooltip_state = {
-            'upgrade': 'Updates Available' + " " + str(len(self.checkapt())),
-            'essential': 'Important Updates Available' +
-                         " " + str(len(self.checkapt())),
-            'inactive': 'No Updates Available',
-            'working': 'Operations In Progress\nPlease wait...',
-            'cache': 'Updating Package Cache\nPlease wait...'
-        }
-
+        self.upgrades = 0
         self.icon.connect('activate', self.on_left_click)
         self.icon.connect('popup-menu', self.on_right_click)
 
@@ -186,6 +191,16 @@ MA 02110-1301, USA. ''')
         sys.exit(0)
 
     def set_state(self, state):
+        self.tooltip_state = {
+            'upgrade': 'Updates Available' + " " + str(self.upgrades),
+            'essential': 'Important Updates Available' +
+                         " " + str(self.upgrades),
+            'inactive': 'No Updates Available',
+            'working': 'Operations In Progress\nPlease wait...',
+            'cache': 'Updating Package Cache\nPlease wait...'
+        }
+
+        self.upgrades = checkcount()
         icon = eval('{0}_icon'.format(state))
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
@@ -200,7 +215,6 @@ MA 02110-1301, USA. ''')
             pass
 
     def checkapt(self):
-
         list_pkgs = []
 
         try:
@@ -240,10 +254,8 @@ MA 02110-1301, USA. ''')
                 state = 'inactive'
 
             self.set_state(state)
-
         self.update_running = False
         gc.collect()
-
 
     def timer_update(self):
         while True:
