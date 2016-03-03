@@ -22,5 +22,5 @@ Johnathan "ShaggyTwoDope" Jenkins
 ##Credits
 - Brian Tomlinson - For ideas, suggestions, and generally helping me improve my code.
 - AdrianKoshka - For helping word things for a sane person, and the great ideas.
-- The Linux Lite users that have helped to report bugs or suggest features.
+- The Linux Lite users - For helping to report bugs or suggest features.
 
