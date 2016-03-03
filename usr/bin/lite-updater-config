@@ -58,13 +58,14 @@ class ConfWindow(Gtk.Window):
         self.set_border_width(8)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.set_icon_from_file(
-            '/usr/share/icons/Faenza/status/scalable/starred-symbolic.svg')
-        grid = Gtk.Grid(column_homogeneous=True, column_spacing=4,
+            '/usr/share/lite-updater/icons/updates-idle.png')
+        grid = Gtk.Grid(column_homogeneous=False, column_spacing=4,
                         row_spacing=5)
         self.add(grid)
 
-        self.label1 = Gtk.Label("Update checking interval (in minutes).",
+        self.label1 = Gtk.Label("Set update check timer in <u><b>minutes</b></u>.",
                                 xalign=0)
+        self.label1.set_use_markup(True)
         adjustment = Gtk.Adjustment(0, 5, 59, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
         retime = (int(config[0]) / 60)
@@ -74,8 +75,9 @@ class ConfWindow(Gtk.Window):
         self.spinbutton1.set_update_policy(policy)
         self.spinbutton1.set_value(delayonevalue)
 
-        self.label2 = Gtk.Label("Update checking interval (in hours).",
+        self.label2 = Gtk.Label("Set update check timer in <u><b>hours</b></u>.",
                                 xalign=0)
+        self.label2.set_use_markup(True)
         adjustment = Gtk.Adjustment(0, 0, 23, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
         retime = (int(config[1]) / 60 / 60)
@@ -85,8 +87,9 @@ class ConfWindow(Gtk.Window):
         self.spinbutton2.set_update_policy(policy)
         self.spinbutton2.set_value(delaytwovalue)
 
-        self.label3 = Gtk.Label("Notifcation display duration (in seconds).",
+        self.label3 = Gtk.Label("Set notification display length in <u><b>seconds</b></u>.",
                                 xalign=0)
+        self.label3.set_use_markup(True)
         adjustment = Gtk.Adjustment(0, 1, 60, 1, 10, 0)
         policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
         retime = (int(config[2]) / 1000)
