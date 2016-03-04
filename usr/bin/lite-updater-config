@@ -232,11 +232,11 @@ class LiteConfig:
         hbox = gtk.HBox(False, 0)
         main_vbox.pack_start(hbox, False, True, 0)
 
-        buttonc = gtk.Button("Close")
+        buttonc = gtk.Button(stock=gtk.STOCK_CLOSE)
         buttonc.connect("clicked", lambda w: gtk.main_quit())
         hbox.pack_start(buttonc, True, True, 5)
 
-        buttona = gtk.Button("Apply")
+        buttona = gtk.Button(stock=gtk.STOCK_APPLY)
         buttona.connect("clicked", apply)
         hbox.pack_start(buttona, True, True, 5)
 
