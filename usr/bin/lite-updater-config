@@ -96,9 +96,11 @@ class LiteConfig:
         def checksig(self):
             if check.get_active() is True:
                 spinner3.set_sensitive(True)
+                check.set_label('Notifications Enabled')
 
             elif check.get_active() is False:
                 spinner3.set_sensitive(False)
+                check.set_label('Notifications Disabled')
 
         def doauto_start(self):
             if Autostart().is_installed():
@@ -195,13 +197,14 @@ class LiteConfig:
         vbox2 = gtk.VBox(False, 0)
         hbox.pack_start(vbox2, True, True, 5)
 
-        check = gtk.CheckButton("Toggle Notifcations")
+        check = gtk.CheckButton("Notifcations Enabled")
         if config[3] == "True":
             check.set_active(True)
             spinner3.set_sensitive(True)
         elif config[3] == "False":
             check.set_active(False)
             spinner3.set_sensitive(False)
+            check.set_label('Notifications Disabled')
         check.connect("toggled", checksig)
 
         vbox.pack_start(check, True, True, 0)
