@@ -97,7 +97,10 @@ class Liteupdater:
         gc.collect()
 
     def on_left_click(self, foo):
-        glib.spawn_async(["/usr/bin/gksu", "/usr/scripts/updates-gui"])
+        cmd = "/usr/bin/gksu /usr/scripts/updates-gui"
+        process = Popen(shlex.split(cmd), stdout=PIPE)
+        process.communicate()
+        self.update()
 
     def checksources(self, foo):
         glib.spawn_async(["/usr/bin/gksu", "/usr/bin/software-properties-gtk"])
