@@ -196,8 +196,6 @@ MA 02110-1301, USA. ''')
     def set_state(self, state):
         self.tooltip_state = {
             'upgrade': 'Updates Available' + " " + str(self.upgrades),
-            'essential': 'Important Updates Available' +
-                         " " + str(self.upgrades),
             'inactive': 'No Updates Available',
             'working': 'Operations In Progress\nPlease wait...',
             'cache': 'Updating Package Cache\nPlease wait...'
@@ -235,8 +233,7 @@ MA 02110-1301, USA. ''')
                 pkg = {
                     'name': chosen_package.name,
                     'version': chosen_package.installed.version,
-                    'candidate': chosen_package.candidate.version,
-                    'essential': chosen_package.essential
+                    'candidate': chosen_package.candidate.version
                 }
                 list_pkgs.append(pkg)
 
@@ -248,12 +245,8 @@ MA 02110-1301, USA. ''')
         if self.update_running is False:
             self.update_running = True
             self.set_state('working')
-            pkglist = self.checkapt()
-            if pkglist:
+            if self.upgrades:
                 state = 'upgrade'
-                for pkg in pkglist:
-                    if pkg['essential'] is True:
-                        state = 'essential'
             else:
                 state = 'inactive'
 
