@@ -71,6 +71,8 @@ def checkcount():
         counter = [change.name for change in changes]
         upgrades = (len(counter))
     return upgrades
+    cache.close()
+    gc.collect()
 
 
 class Liteupdater:
