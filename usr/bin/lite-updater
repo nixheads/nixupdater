@@ -216,31 +216,6 @@ MA 02110-1301, USA. ''')
             pass
         gc.collect()
 
-    def checkapt(self):
-        list_pkgs = []
-
-        try:
-            apt_cache = apt.Cache()
-        except SystemError:
-            return list_pkgs
-
-        apt_cache.open()
-
-        for package_name in list(apt_cache.keys()):
-            chosen_package = apt_cache[package_name]
-
-            if chosen_package.is_upgradable:
-                pkg = {
-                    'name': chosen_package.name,
-                    'version': chosen_package.installed.version,
-                    'candidate': chosen_package.candidate.version
-                }
-                list_pkgs.append(pkg)
-
-        return list_pkgs
-        apt_cache.close()
-        gc.collect()
-
     def update(self, ev=None):
         if self.update_running is False:
             self.update_running = True
