@@ -216,6 +216,7 @@ MA 02110-1301, USA. ''')
             n.show()
         elif config[3] == "False":
             pass
+        gc.collect()
 
     def checkapt(self):
         list_pkgs = []
