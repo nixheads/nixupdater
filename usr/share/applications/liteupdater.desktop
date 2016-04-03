@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Lite Updater
 GenericName=Lite Updater
-Comment=An siple, lite updater checker for your tray.
+Comment=An simple, lite updater checker for your tray.
 Exec=lite-updater
 Terminal=false
 Icon=liteupdater
