@@ -166,7 +166,7 @@ class Liteupdater:
 
         about_dialog.set_destroy_with_parent(True)
         about_dialog.set_name('Lite Updater')
-        about_dialog.set_comments('A simple lite update checker'
+        about_dialog.set_comments('A simple, lite update checker'
                                   ' for your tray.')
         about_dialog.set_website('https://github.com/linuxlite/lite-updater')
         about_dialog.set_website_label('Homepage')
