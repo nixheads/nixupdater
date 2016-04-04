@@ -14,7 +14,7 @@ Current depends required to run are:
 
 ![](http://i.imgur.com/XkhMwV3.png)
 
-![](http://i.imgur.com/Z305Z8Z.png)
+![](http://i.imgur.com/9S1mCKc.png)
 
 ##Author
 Johnathan "ShaggyTwoDope" Jenkins
