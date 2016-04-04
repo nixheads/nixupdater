@@ -177,10 +177,7 @@ class Liteupdater:
                               '/lite-updater.conf', "w")
             for item in config:
                 configfile.write("%s\n" % item)
-            
-            
             cwindow.destroy()
-            
 
         def checksig(self):
             if check.get_active() is True:
@@ -330,9 +327,6 @@ class Liteupdater:
         hbox.pack_start(buttona, True, True, 5)
 
         cwindow.show_all()
-
-        
-        
 
     def on_right_click(self, icon, button, time):
         menu = gtk.Menu()
