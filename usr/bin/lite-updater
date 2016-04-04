@@ -59,6 +59,41 @@ def get_global_config():
     return config
 
 
+
+
+
+class Autostart(object):
+
+    def user_autostart_path(self):
+        config_autostart_path = os.getenv("HOME") + "/.config/autostart/"
+
+        if not os.path.exists(config_autostart_path):
+            os.makedirs(config_autostart_path)
+
+        return config_autostart_path + "lite-updater.desktop"
+
+    def is_installed(self):
+        return os.path.exists(self.user_autostart_path())
+
+    def install(self):
+        with open(self.user_autostart_path(), "w") as desktop_file:
+            desktop_file.write("""[Desktop Entry]
+Type=Application
+Version=0.1
+Name=Lite-Updater
+GenericName=Lite-Updater
+Comment=Linux Lite Update Checker
+Exec=/usr/bin/lite-updater
+Terminal=false
+Categories=GTK;Utility;
+StartupNotify=true""")
+
+        return True
+
+    def uninstall(self):
+        os.remove(self.user_autostart_path())
+
+
 def checkcount():
     global upgrades
     cache = apt.Cache()
@@ -107,11 +142,202 @@ class Liteupdater:
     def checksources(self, foo):
         glib.spawn_async(["/usr/bin/gksu", "/usr/bin/software-properties-gtk"])
 
-    def doconfig(self, foo):
-        cmd = "/usr/bin/lite-updater-config"
-        process = Popen(shlex.split(cmd), stdout=PIPE)
-        process.communicate()
-        get_global_config()
+    def theconfig(self, foo):
+		self.doconfig()
+		get_global_config()
+
+    def doconfig(self):
+        cwindow = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        cwindow.set_position(gtk.WIN_POS_CENTER)
+        cwindow.set_title("Updater Config")
+        # TODO set icon
+        cwindow.set_icon_from_file(
+            '/usr/share/icons/Faenza/status/scalable/starred-symbolic.svg')
+        main_vbox = gtk.VBox(False, 5)
+        main_vbox.set_border_width(10)
+        cwindow.add(main_vbox)
+
+        def default(self):
+            config = ["1800", "3600", "3000",  "True"]
+            configfile = open(os.path.expanduser("~") + '/.config' +
+                              '/lite-updater.conf', "w")
+            for item in config:
+                configfile.write("%s\n" % item)
+            spinner1.set_value(1)
+            spinner2.set_value(30)
+            spinner3.set_value(3)
+            check.set_active(True)
+            apply
+
+        def apply(self):
+            mins = spinner2.get_value_as_int()
+            config[0] = mins * 60
+            hours = spinner1.get_value_as_int()
+            config[1] = hours * 60 * 60
+            dseconds = spinner3.get_value_as_int()
+            config[2] = dseconds * 1000
+            config[3] = check.get_active()
+
+            configfile = open(os.path.expanduser("~") + '/.config' +
+                              '/lite-updater.conf', "w")
+            for item in config:
+                configfile.write("%s\n" % item)
+            
+            
+            cwindow.destroy()
+            
+
+        def checksig(self):
+            if check.get_active() is True:
+                spinner3.set_sensitive(True)
+                check.set_label('Notifications Enabled')
+
+            elif check.get_active() is False:
+                spinner3.set_sensitive(False)
+                check.set_label('Notifications Disabled')
+
+        def doauto_start(self):
+            if Autostart().is_installed():
+                pass
+            else:
+                Autostart().install()
+
+        def doauto_remove(self):
+            if Autostart().is_installed():
+                Autostart().uninstall()
+            else:
+                pass
+
+        def autostart(self):
+            if Autostart().is_installed():
+                doauto_remove(button)
+                button.set_label("Enable Autostart")
+            else:
+                doauto_start(button)
+                button.set_label("Disable Autostart")
+
+        frame = gtk.Frame("Update Check Period")
+        main_vbox.pack_start(frame, True, True, 0)
+
+        vbox = gtk.VBox(False, 0)
+        vbox.set_border_width(5)
+        frame.add(vbox)
+
+        hbox = gtk.HBox(False, 0)
+        vbox.pack_start(hbox, True, True, 5)
+
+        vbox2 = gtk.VBox(False, 0)
+        hbox.pack_start(vbox2, True, True, 5)
+
+        label = gtk.Label("Hours :")
+        label.set_alignment(0, 0.5)
+        vbox2.pack_start(label, False, True, 0)
+
+        adj = gtk.Adjustment(0, 0, 23, 1, 10, 0)
+        spinner1 = gtk.SpinButton(adj, 0, 0)
+        policy = gtk.UPDATE_IF_VALID
+        spinner1.set_update_policy(policy)
+        spinner1.set_value(int(config[1]) / 60 / 60)
+
+        spinner1.set_wrap(True)
+        vbox2.pack_start(spinner1, False, True, 0)
+
+        vbox2 = gtk.VBox(False, 0)
+        hbox.pack_start(vbox2, True, True, 5)
+
+        label = gtk.Label("Minutes :")
+        label.set_alignment(0, 0.5)
+        vbox2.pack_start(label, False, True, 0)
+
+        adj = gtk.Adjustment(0, 5, 59, 1, 10, 0)
+        policy = gtk.UPDATE_IF_VALID
+        spinner2 = gtk.SpinButton(adj, 0, 0)
+        spinner2.set_update_policy(policy)
+        spinner2.set_value(int(config[0]) / 60)
+
+        spinner2.set_wrap(True)
+        vbox2.pack_start(spinner2, False, True, 0)
+
+        vbox2 = gtk.VBox(False, 0)
+        hbox.pack_start(vbox2, True, True, 5)
+
+        frame = gtk.Frame("Notification Duration")
+        main_vbox.pack_start(frame, True, True, 0)
+
+        vbox = gtk.VBox(False, 0)
+        vbox.set_border_width(5)
+        frame.add(vbox)
+
+        hbox = gtk.HBox(False, 0)
+        vbox.pack_start(hbox, False, True, 5)
+
+        vbox2 = gtk.VBox(False, 0)
+        hbox.pack_start(vbox2, True, True, 5)
+
+        label = gtk.Label("Seconds :")
+        label.set_alignment(0, 0.5)
+        vbox2.pack_start(label, False, True, 0)
+
+        adj = gtk.Adjustment(0, 1, 60, 1, 10, 0)
+        policy = gtk.UPDATE_IF_VALID
+        spinner3 = gtk.SpinButton(adj, 0, 0)
+        spinner3.set_update_policy(policy)
+        spinner3.set_value(int(config[2]) / 1000)
+
+        spinner3.set_wrap(True)
+        spinner3.set_size_request(100, -1)
+        vbox2.pack_start(spinner3, False, True, 0)
+
+        vbox2 = gtk.VBox(False, 0)
+        hbox.pack_start(vbox2, True, True, 5)
+
+        check = gtk.CheckButton("Notifcations Enabled")
+        if config[3] == "True":
+            check.set_active(True)
+            spinner3.set_sensitive(True)
+        elif config[3] == "False":
+            check.set_active(False)
+            spinner3.set_sensitive(False)
+            check.set_label('Notifications Disabled')
+        check.connect("toggled", checksig)
+
+        vbox.pack_start(check, True, True, 0)
+
+        frame = gtk.Frame("Miscellaneous Settings")
+        main_vbox.pack_start(frame, True, True, 0)
+
+        vbox = gtk.VBox(False, 0)
+        vbox.set_border_width(5)
+        frame.add(vbox)
+
+        hbox = gtk.HBox(False, 0)
+        vbox.pack_start(hbox, False, True, 5)
+        button = gtk.Button("Reset")
+        button.connect("clicked", default)
+        hbox.pack_start(button, True, True, 5)
+
+        if Autostart().is_installed():
+            button = gtk.Button("Disable Autostart")
+        else:
+            button = gtk.Button("Enable Autostart")
+        button.connect("clicked", autostart)
+        hbox.pack_start(button, True, True, 5)
+
+        hbox = gtk.HBox(False, 0)
+        main_vbox.pack_start(hbox, False, True, 0)
+
+        buttonc = gtk.Button(stock=gtk.STOCK_CLOSE)
+        buttonc.connect("clicked", lambda w: cwindow.destroy())
+        hbox.pack_start(buttonc, True, True, 5)
+
+        buttona = gtk.Button(stock=gtk.STOCK_APPLY)
+        buttona.connect("clicked", apply)
+        hbox.pack_start(buttona, True, True, 5)
+
+        cwindow.show_all()
+
+        
+        
 
     def on_right_click(self, icon, button, time):
         menu = gtk.Menu()
@@ -145,7 +371,7 @@ class Liteupdater:
         enableauto = gtk.ImageMenuItem('Configuration')
         img4.set_from_file(working_icon)
         enableauto.set_image(img4)
-        enableauto.connect('activate', self.doconfig)
+        enableauto.connect('activate', self.theconfig)
         menu.append(enableauto)
         sep2 = gtk.SeparatorMenuItem()
         menu.append(sep2)
