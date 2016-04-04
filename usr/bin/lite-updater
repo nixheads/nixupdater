@@ -59,9 +59,6 @@ def get_global_config():
     return config
 
 
-
-
-
 class Autostart(object):
 
     def user_autostart_path(self):
@@ -143,16 +140,14 @@ class Liteupdater:
         glib.spawn_async(["/usr/bin/gksu", "/usr/bin/software-properties-gtk"])
 
     def theconfig(self, foo):
-		self.doconfig()
-		get_global_config()
+        self.doconfig()
+        get_global_config()
 
     def doconfig(self):
         cwindow = gtk.Window(gtk.WINDOW_TOPLEVEL)
         cwindow.set_position(gtk.WIN_POS_CENTER)
         cwindow.set_title("Updater Config")
-        # TODO set icon
-        cwindow.set_icon_from_file(
-            '/usr/share/icons/Faenza/status/scalable/starred-symbolic.svg')
+        cwindow.set_icon_from_file(upgrade_icon)
         main_vbox = gtk.VBox(False, 5)
         main_vbox.set_border_width(10)
         cwindow.add(main_vbox)
