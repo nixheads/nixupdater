@@ -63,10 +63,8 @@ class Autostart(object):
 
     def user_autostart_path(self):
         config_autostart_path = os.getenv("HOME") + "/.config/autostart/"
-
         if not os.path.exists(config_autostart_path):
             os.makedirs(config_autostart_path)
-
         return config_autostart_path + "lite-updater.desktop"
 
     def is_installed(self):
@@ -172,7 +170,6 @@ class Liteupdater:
             dseconds = spinner3.get_value_as_int()
             config[2] = dseconds * 1000
             config[3] = check.get_active()
-
             configfile = open(os.path.expanduser("~") + '/.config' +
                               '/lite-updater.conf', "w")
             for item in config:
@@ -183,7 +180,6 @@ class Liteupdater:
             if check.get_active() is True:
                 spinner3.set_sensitive(True)
                 check.set_label('Notifications Enabled')
-
             elif check.get_active() is False:
                 spinner3.set_sensitive(False)
                 check.set_label('Notifications Disabled')
@@ -210,79 +206,59 @@ class Liteupdater:
 
         frame = gtk.Frame("Update Check Period")
         main_vbox.pack_start(frame, True, True, 0)
-
         vbox = gtk.VBox(False, 0)
         vbox.set_border_width(5)
         frame.add(vbox)
-
         hbox = gtk.HBox(False, 0)
         vbox.pack_start(hbox, True, True, 5)
-
         vbox2 = gtk.VBox(False, 0)
         hbox.pack_start(vbox2, True, True, 5)
-
         label = gtk.Label("Hours :")
         label.set_alignment(0, 0.5)
         vbox2.pack_start(label, False, True, 0)
-
         adj = gtk.Adjustment(0, 0, 23, 1, 10, 0)
         spinner1 = gtk.SpinButton(adj, 0, 0)
         policy = gtk.UPDATE_IF_VALID
         spinner1.set_update_policy(policy)
         spinner1.set_value(int(config[1]) / 60 / 60)
-
         spinner1.set_wrap(True)
         vbox2.pack_start(spinner1, False, True, 0)
-
         vbox2 = gtk.VBox(False, 0)
         hbox.pack_start(vbox2, True, True, 5)
-
         label = gtk.Label("Minutes :")
         label.set_alignment(0, 0.5)
         vbox2.pack_start(label, False, True, 0)
-
         adj = gtk.Adjustment(0, 5, 59, 1, 10, 0)
         policy = gtk.UPDATE_IF_VALID
         spinner2 = gtk.SpinButton(adj, 0, 0)
         spinner2.set_update_policy(policy)
         spinner2.set_value(int(config[0]) / 60)
-
         spinner2.set_wrap(True)
         vbox2.pack_start(spinner2, False, True, 0)
-
         vbox2 = gtk.VBox(False, 0)
         hbox.pack_start(vbox2, True, True, 5)
-
         frame = gtk.Frame("Notification Duration")
         main_vbox.pack_start(frame, True, True, 0)
-
         vbox = gtk.VBox(False, 0)
         vbox.set_border_width(5)
         frame.add(vbox)
-
         hbox = gtk.HBox(False, 0)
         vbox.pack_start(hbox, False, True, 5)
-
         vbox2 = gtk.VBox(False, 0)
         hbox.pack_start(vbox2, True, True, 5)
-
         label = gtk.Label("Seconds :")
         label.set_alignment(0, 0.5)
         vbox2.pack_start(label, False, True, 0)
-
         adj = gtk.Adjustment(0, 1, 60, 1, 10, 0)
         policy = gtk.UPDATE_IF_VALID
         spinner3 = gtk.SpinButton(adj, 0, 0)
         spinner3.set_update_policy(policy)
         spinner3.set_value(int(config[2]) / 1000)
-
         spinner3.set_wrap(True)
         spinner3.set_size_request(100, -1)
         vbox2.pack_start(spinner3, False, True, 0)
-
         vbox2 = gtk.VBox(False, 0)
         hbox.pack_start(vbox2, True, True, 5)
-
         check = gtk.CheckButton("Notifcations Enabled")
         if config[3] == "True":
             check.set_active(True)
@@ -292,40 +268,31 @@ class Liteupdater:
             spinner3.set_sensitive(False)
             check.set_label('Notifications Disabled')
         check.connect("toggled", checksig)
-
         vbox.pack_start(check, True, True, 0)
-
         frame = gtk.Frame("Miscellaneous Settings")
         main_vbox.pack_start(frame, True, True, 0)
-
         vbox = gtk.VBox(False, 0)
         vbox.set_border_width(5)
         frame.add(vbox)
-
         hbox = gtk.HBox(False, 0)
         vbox.pack_start(hbox, False, True, 5)
         button = gtk.Button("Reset")
         button.connect("clicked", default)
         hbox.pack_start(button, True, True, 5)
-
         if Autostart().is_installed():
             button = gtk.Button("Disable Autostart")
         else:
             button = gtk.Button("Enable Autostart")
         button.connect("clicked", autostart)
         hbox.pack_start(button, True, True, 5)
-
         hbox = gtk.HBox(False, 0)
         main_vbox.pack_start(hbox, False, True, 0)
-
         buttonc = gtk.Button(stock=gtk.STOCK_CLOSE)
         buttonc.connect("clicked", lambda w: cwindow.destroy())
         hbox.pack_start(buttonc, True, True, 5)
-
         buttona = gtk.Button(stock=gtk.STOCK_APPLY)
         buttona.connect("clicked", apply)
         hbox.pack_start(buttona, True, True, 5)
-
         cwindow.show_all()
 
     def on_right_click(self, icon, button, time):
