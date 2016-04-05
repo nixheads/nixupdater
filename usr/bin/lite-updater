@@ -138,9 +138,9 @@ class Liteupdater:
         glib.spawn_async(["/usr/bin/gksu", "/usr/bin/software-properties-gtk"])
 
     def theconfig(self, foo):
-        self.doconfig()
         get_global_config()
-
+        self.doconfig()
+        
     def doconfig(self):
         cwindow = gtk.Window(gtk.WINDOW_TOPLEVEL)
         cwindow.set_position(gtk.WIN_POS_CENTER)
@@ -174,6 +174,7 @@ class Liteupdater:
                               '/lite-updater.conf', "w")
             for item in config:
                 configfile.write("%s\n" % item)
+            get_global_config()
             cwindow.destroy()
 
         def checksig(self):
