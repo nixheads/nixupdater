@@ -358,7 +358,7 @@ class Liteupdater:
         about_dialog.set_icon(gdk.pixbuf_new_from_file(upgrade_icon))
         about_dialog.set_logo(gdk.pixbuf_new_from_file(logo))
         about_dialog.set_copyright('Copyright 2016')
-        about_dialog.set_version('1.0-0090')
+        about_dialog.set_version(appver)
         about_dialog.set_authors(['Johnathan "ShaggyTwoDope" Jenkins'])
         about_dialog.set_license('''This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by
@@ -437,6 +437,7 @@ MA 02110-1301, USA. ''')
 
 if __name__ == "__main__":
     appname = 'Lite Updater'
+    appver = '1.0-0090'
     iconpath = '/usr/share/lite-updater/icons/'
     inactive_icon = iconpath + 'updates-idle.png'
     working_icon = iconpath + 'aptdaemon-working.png'
