@@ -40,7 +40,6 @@ def run_check():
 iconpath = '/usr/share/lite-updater/icons/'
 inactive_icon = iconpath + 'updates-idle.png'
 working_icon = iconpath + 'aptdaemon-working.png'
-cache_icon = iconpath + 'cache-icon.png'
 upgrade_icon = iconpath + 'updates-available.png'
 logo = iconpath + 'lite_logo.png'
 
