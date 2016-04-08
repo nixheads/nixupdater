@@ -48,13 +48,6 @@ def run_once_dialog():
     dialog.destroy()
 
 
-iconpath = '/usr/share/lite-updater/icons/'
-inactive_icon = iconpath + 'updates-idle.png'
-working_icon = iconpath + 'aptdaemon-working.png'
-upgrade_icon = iconpath + 'updates-available.png'
-logo = iconpath + 'lite_logo.png'
-
-
 def get_global_config():
     global config
     config = []
@@ -444,6 +437,11 @@ MA 02110-1301, USA. ''')
 
 if __name__ == "__main__":
     appname = 'Lite Updater'
+    iconpath = '/usr/share/lite-updater/icons/'
+    inactive_icon = iconpath + 'updates-idle.png'
+    working_icon = iconpath + 'aptdaemon-working.png'
+    upgrade_icon = iconpath + 'updates-available.png'
+    logo = iconpath + 'lite_logo.png'
     fl = 0
     app = Liteupdater()
     try:
