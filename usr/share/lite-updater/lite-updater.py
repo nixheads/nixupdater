@@ -42,7 +42,6 @@ inactive_icon = iconpath + 'updates-idle.png'
 working_icon = iconpath + 'aptdaemon-working.png'
 cache_icon = iconpath + 'cache-icon.png'
 upgrade_icon = iconpath + 'updates-available.png'
-essential_icon = iconpath + 'updates-available.png'
 logo = iconpath + 'lite_logo.png'
 
 
@@ -121,7 +120,7 @@ class Liteupdater:
         self.icon.connect('popup-menu', self.on_right_click)
 
     def update_cache(self, foo=None):
-        self.set_state('cache')
+        self.set_state('working')
         cmd = "/usr/share/lite-updater/lite-cache-check.py"
         process = Popen(shlex.split(cmd), stdout=PIPE)
         process.communicate()
@@ -312,7 +311,7 @@ class Liteupdater:
         img2.set_from_file(working_icon)
         chsources.set_image(img2)
         installupdate = gtk.ImageMenuItem('Install Updates')
-        img3.set_from_file(essential_icon)
+        img3.set_from_file(upgrade_icon)
         installupdate.set_image(img3)
         refresh = gtk.ImageMenuItem('gtk-refresh', None)
         quit = gtk.ImageMenuItem('gtk-quit', None)
