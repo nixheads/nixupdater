@@ -1,4 +1,7 @@
 ##Lite-Updater
+[![Build Status][BS img]][Build Status]
+[Build Status]: https://travis-ci.org/shaggytwodope/lite-updater
+[BS img]: https://api.travis-ci.org/shaggytwodope/lite-updater.png
 
 Designed for use on the Linux Lite Distro .
 This is a tool that checks apt for updates and notify's the user accordingly.
