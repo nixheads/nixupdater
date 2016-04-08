@@ -356,7 +356,7 @@ class Liteupdater:
         about_dialog.set_icon(gdk.pixbuf_new_from_file(upgrade_icon))
         about_dialog.set_logo(gdk.pixbuf_new_from_file(logo))
         about_dialog.set_copyright('Copyright 2016')
-        about_dialog.set_version('1.0-0050')
+        about_dialog.set_version('1.0-0060')
         about_dialog.set_authors(['Johnathan "ShaggyTwoDope" Jenkins'])
         about_dialog.set_license('''This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by

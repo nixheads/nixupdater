@@ -9,7 +9,6 @@
 import sys
 from gi.repository import GLib
 from aptdaemon.client import AptClient
-from aptdaemon.enums import *
 
 
 loop = GLib.MainLoop()
@@ -18,12 +17,12 @@ aptclient = AptClient()
 
 def on_finished_update(trans, exit):
     if exit == "exit-success":
-        print("success")
+        print("successful cache update")
         loop.quit()
         sys.exit(0)
     else:
-        print("error")
-        do_bad_exit()
+        print("error updating cache")
+        sys.exit(1)
     return True
 
 
@@ -32,11 +31,6 @@ def do_update():
     trans_update.connect("finished", on_finished_update)
     trans_update.run()
     return False
-
-
-def do_bad_exit():
-    print("error9000")
-    sys.exit(1)
 
 
 if __name__ == "__main__":
