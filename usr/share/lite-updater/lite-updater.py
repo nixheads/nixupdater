@@ -28,13 +28,27 @@ gtk.gdk.threads_init()
 fl = 0
 
 
+def run_once_dialog():
+    dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
+                               gtk.BUTTONS_OK,
+                               appname + ' - Error')
+    dialog.set_default_size(400, 250)
+    dialog.format_secondary_text("There is another instance of " +
+                                 appname + " already running.")
+    response = dialog.run()
+    if response == gtk.RESPONSE_OK:
+        dialog.destroy()
+        sys.exit()
+    dialog.destroy()
+
+
 def run_check():
     global fl
     fl = open(os.path.realpath(__file__), 'r')
     try:
         fcntl.flock(fl, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except:
-        sys.exit(0)
+        run_once_dialog()
 
 
 iconpath = '/usr/share/lite-updater/icons/'
@@ -346,7 +360,7 @@ class Liteupdater:
         about_dialog = gtk.AboutDialog()
 
         about_dialog.set_destroy_with_parent(True)
-        about_dialog.set_name('Lite Updater')
+        about_dialog.set_name(appname)
         about_dialog.set_comments('A simple, lite update checker'
                                   ' for your tray.')
         about_dialog.set_website('https://github.com/linuxlite/lite-updater')
@@ -389,7 +403,7 @@ MA 02110-1301, USA. ''')
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
         if config[3] == "True":
-            n = notify2.Notification("Lite-Updater",
+            n = notify2.Notification(appname,
                                      (self.tooltip_state[state]))
             nicon = gdk.pixbuf_new_from_file(icon)
             n.set_icon_from_pixbuf(nicon)
@@ -432,6 +446,7 @@ MA 02110-1301, USA. ''')
         gtk.main()
 
 if __name__ == "__main__":
+    appname = 'Lite Updater'
     app = Liteupdater()
     try:
         run_check()
