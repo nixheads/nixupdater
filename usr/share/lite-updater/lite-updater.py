@@ -25,7 +25,13 @@ pygtk.require('2.0')
 gtk.gdk.threads_init()
 
 
-fl = 0
+def run_check():
+    global fl
+    fl = open(os.path.realpath(__file__), 'r')
+    try:
+        fcntl.flock(fl, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except:
+        run_once_dialog()
 
 
 def run_once_dialog():
@@ -40,15 +46,6 @@ def run_once_dialog():
         dialog.destroy()
         sys.exit()
     dialog.destroy()
-
-
-def run_check():
-    global fl
-    fl = open(os.path.realpath(__file__), 'r')
-    try:
-        fcntl.flock(fl, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except:
-        run_once_dialog()
 
 
 iconpath = '/usr/share/lite-updater/icons/'
@@ -447,6 +444,7 @@ MA 02110-1301, USA. ''')
 
 if __name__ == "__main__":
     appname = 'Lite Updater'
+    fl = 0
     app = Liteupdater()
     try:
         run_check()
