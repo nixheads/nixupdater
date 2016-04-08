@@ -140,7 +140,7 @@ class Liteupdater:
     def theconfig(self, foo):
         get_global_config()
         self.doconfig()
-        
+
     def doconfig(self):
         cwindow = gtk.Window(gtk.WINDOW_TOPLEVEL)
         cwindow.set_position(gtk.WIN_POS_CENTER)
