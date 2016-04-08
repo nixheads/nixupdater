@@ -1,5 +1,4 @@
-##Lite-Updater
-[![Build Status][BS img]][Build Status]
+##Lite-Updater [![Build Status][BS img]][Build Status]
 [Build Status]: https://travis-ci.org/shaggytwodope/lite-updater
 [BS img]: https://api.travis-ci.org/shaggytwodope/lite-updater.png
 
