@@ -305,7 +305,7 @@ class Liteupdater:
 
         about = gtk.ImageMenuItem('gtk-about', None)
         updatechk = gtk.ImageMenuItem('Update Cache')
-        img1.set_from_file(cache_icon)
+        img1.set_from_file(working_icon)
         updatechk.set_image(img1)
         chsources = gtk.ImageMenuItem('Change Sources')
         img2.set_from_file(working_icon)
