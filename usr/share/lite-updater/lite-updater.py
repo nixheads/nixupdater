@@ -149,7 +149,7 @@ class Liteupdater:
         cwindow.add(main_vbox)
 
         def default(self):
-            config = ["1800", "3600", "3000",  "True"]
+            config = ["1800", "3600", "3000", "True"]
             configfile = open(os.path.expanduser("~") + '/.config' +
                               '/lite-updater.conf', "w")
             for item in config:
@@ -161,6 +161,7 @@ class Liteupdater:
             apply
 
         def apply(self):
+            global config
             mins = spinner2.get_value_as_int()
             config[0] = mins * 60
             hours = spinner1.get_value_as_int()
@@ -172,8 +173,7 @@ class Liteupdater:
                               '/lite-updater.conf', "w")
             for item in config:
                 configfile.write("%s\n" % item)
-            get_global_config()
-            cwindow.destroy()
+            return config
 
         def checksig(self):
             if check.get_active() is True:
