@@ -35,12 +35,11 @@ def run_check():
 
 
 def run_once_dialog():
-    dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
-                               gtk.BUTTONS_OK,
+    dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK,
                                appname + ' - Error')
     dialog.set_default_size(400, 250)
-    dialog.format_secondary_text("There is another instance of " +
-                                 appname + " already running.")
+    dialog.format_secondary_text("There is another instance of " + appname +
+                                 " already running.")
     response = dialog.run()
     if response == gtk.RESPONSE_OK:
         dialog.destroy()
@@ -62,7 +61,6 @@ def get_global_config():
 
 
 class Autostart(object):
-
     def user_autostart_path(self):
         config_autostart_path = os.getenv("HOME") + "/.config/autostart/"
         if not os.path.exists(config_autostart_path):
@@ -108,7 +106,6 @@ def checkcount():
 
 
 class Liteupdater:
-
     def __init__(self):
         self.config = get_global_config()
         self.icon = gtk.status_icon_new_from_file(inactive_icon)
@@ -154,8 +151,9 @@ class Liteupdater:
 
         def default(self):
             config = ["1800", "3600", "3000", "True"]
-            configfile = open(os.path.expanduser("~") + '/.config' +
-                              '/lite-updater.conf', "w")
+            configfile = open(
+                os.path.expanduser("~") + '/.config' + '/lite-updater.conf',
+                "w")
             for item in config:
                 configfile.write("%s\n" % item)
             spinner1.set_value(1)
@@ -173,8 +171,9 @@ class Liteupdater:
             dseconds = spinner3.get_value_as_int()
             config[2] = dseconds * 1000
             config[3] = check.get_active()
-            configfile = open(os.path.expanduser("~") + '/.config' +
-                              '/lite-updater.conf', "w")
+            configfile = open(
+                os.path.expanduser("~") + '/.config' + '/lite-updater.conf',
+                "w")
             for item in config:
                 configfile.write("%s\n" % item)
             return config
@@ -360,7 +359,8 @@ class Liteupdater:
         about_dialog.set_copyright('Copyright 2016')
         about_dialog.set_version(appver)
         about_dialog.set_authors(['Johnathan "ShaggyTwoDope" Jenkins'])
-        about_dialog.set_license('''This program is free software; you can redistribute it and/or modify it
+        about_dialog.set_license(
+            '''This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
@@ -393,8 +393,7 @@ MA 02110-1301, USA. ''')
         self.icon.set_from_file(icon)
         self.icon.set_tooltip(self.tooltip_state[state])
         if config[3] == "True":
-            n = notify2.Notification(appname,
-                                     (self.tooltip_state[state]))
+            n = notify2.Notification(appname, (self.tooltip_state[state]))
             nicon = gdk.pixbuf_new_from_file(icon)
             n.set_icon_from_pixbuf(nicon)
             n.set_timeout(int(config[2]))
@@ -434,6 +433,7 @@ MA 02110-1301, USA. ''')
         t.start()
         gc.collect()
         gtk.main()
+
 
 if __name__ == "__main__":
     appname = 'Lite Updater'

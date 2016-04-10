@@ -10,7 +10,6 @@ import sys
 from gi.repository import GLib
 from aptdaemon.client import AptClient
 
-
 loop = GLib.MainLoop()
 aptclient = AptClient()
 
