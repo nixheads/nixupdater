@@ -128,7 +128,7 @@ class Liteupdater:
         gc.collect()
 
     def on_left_click(self, foo):
-        cmd = "/usr/bin/gksu /usr/scripts/updates-gui"
+        cmd = "/usr/bin/gksu /usr/scripts/updates-gui-noprompt"
         process = Popen(shlex.split(cmd), stdout=PIPE)
         process.communicate()
         self.update()
