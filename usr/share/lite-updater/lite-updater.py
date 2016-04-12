@@ -437,7 +437,7 @@ MA 02110-1301, USA. ''')
 
 if __name__ == "__main__":
     appname = 'Lite Updater'
-    appver = '1.0-0090'
+    appver = '1.0-0100'
     iconpath = '/usr/share/lite-updater/icons/'
     inactive_icon = iconpath + 'updates-idle.png'
     working_icon = iconpath + 'aptdaemon-working.png'
