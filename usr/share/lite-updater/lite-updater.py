@@ -143,7 +143,7 @@ class Liteupdater:
     def doconfig(self):
         cwindow = gtk.Window(gtk.WINDOW_TOPLEVEL)
         cwindow.set_position(gtk.WIN_POS_CENTER)
-        cwindow.set_title("Updater Config")
+        cwindow.set_title("Updater Preferences")
         cwindow.set_icon_from_file(upgrade_icon)
         main_vbox = gtk.VBox(False, 5)
         main_vbox.set_border_width(10)
@@ -327,7 +327,7 @@ class Liteupdater:
         quit.connect('activate', self.quit)
 
         menu.append(about)
-        enableauto = gtk.ImageMenuItem('Configuration')
+        enableauto = gtk.ImageMenuItem('Preferences')
         img4.set_from_file(working_icon)
         enableauto.set_image(img4)
         enableauto.connect('activate', self.theconfig)
