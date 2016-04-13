@@ -315,7 +315,8 @@ class Liteupdater:
         installupdate = gtk.ImageMenuItem('Update')
         img3.set_from_file(upgrade_icon)
         installupdate.set_image(img3)
-        refresh = gtk.ImageMenuItem('gtk-reload', None)
+        refresh = gtk.ImageMenuItem('gtk-refresh', None)
+        refresh.set_label('Reload')
         quit = gtk.ImageMenuItem('gtk-quit', None)
 
         about.connect('activate', self.show_about_dialog)
