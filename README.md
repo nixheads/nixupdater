@@ -13,6 +13,10 @@ It does this by updating the cache based on a timer the user can select in the c
 
 ![](http://i.imgur.com/9S1mCKc.png)
 
+## License ![License](https://img.shields.io/badge/license-GPLv2-green.svg)
+
+This project is under the GPLv2 license.
+
 ##Depends
 
 Current depends required to run are:
