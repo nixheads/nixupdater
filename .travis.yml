@@ -1,7 +1,19 @@
 language: python
 python:
-  - "2.7"
+- '2.7'
 install:
-  - pip install pytest
-  - pip install pytest-pep8
-script: py.test --pep8 .
+- pip install pytest
+- pip install pytest-pep8
+script:
+    - py.test --pep8 .
+    - make
+deploy:
+  provider: releases
+  api_key:
+    secure: pD6GSdirS+0PcLZEQzDUm6vTjZx0Ge2yvO7LCEc80pN5IscAsn/vxRb+MYU9WOS8y5bSSTTdRdToiIou9MdbCnk2+CZOiA2VX2eN9gmVj2zLKGYlc2N7ULoQ8+DLFCw0XpDj5Juthxi9FjnuyNtw/ALvku2oZ/rjDNp+sBG/ghriYumhlWP5o1Xuy46iRIYVhwGg2Hgse99H/3PP6DoXdCazOoFimib9ay/xxrBcKWOnqVF32yfce9eC491YrDiFTJnql2agcn/rJrgmqVZWcPTIT6/Vc379rzBG2FKfloVFAFdhtjQ5ryPJL7G2QG2GnMSlMJvzqcBPEUbSv/BpwJR2AtJpMf83uQgV7q4VYJLrDlqLdl8VAWgwE5L7BCC2bJCUEG0TE1J2NCzeFyOYnRozce+WTWcQmwggCQur1Fye7Gncz1bX0dN84cI8d/5wugqCjBlV583RXPLPd9/HIGAwMYRu1YPNsoV4I9fYA3tpq6SQ0/4mNT/GWMx35Iju9f8Nq2gMzxaWocv9DlYUWy6UfpNFQZQmhh9S0kGIum261wlw8LPYNS7BRwm4IW/6G8iUPC5ce7I1XlHqlMT1EXmuM18SEAFEyWnSZrZF5/Eo077mTLP90b0pJnNUjruR4xT34fkoI20FlMzbGK6P5hY1RW60cCXLmNppbYQJzqs=
+  file_glob: true
+  file: "*.deb"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: shaggytwodope/nixupdater
