@@ -1,8 +1,8 @@
 PREFIX ?= /usr
-TARGET = nixcontrolcenter
+TARGET = nixupdater
 ARCH= all
 HOSTARCH=$(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
-VERSION = 1.0.1
+VERSION = 1.0.0
 
 
 deb:
