@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Lite Updater
-GenericName=Lite Updater
+Name=Nix Updater
+GenericName=Nix Updater
 Comment=A simple, lite updater checker for your tray.
-Exec=lite-updater
+Exec=nixupdater
 Terminal=false
-Icon=liteupdater
+Icon=nixupdater
 Type=Application
 Categories=Settings;
 Version=1.0

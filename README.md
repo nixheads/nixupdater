@@ -1,9 +1,8 @@
-Lite-Updater [![Build Status][BS img]][Build Status]
+Nix Updater [![Build Status][BS img]][Build Status]
 =================
-[Build Status]: https://travis-ci.org/shaggytwodope/lite-updater
-[BS img]: https://api.travis-ci.org/shaggytwodope/lite-updater.png
+[Build Status]: https://travis-ci.org/nixheads/nixupdater
+[BS img]: https://api.travis-ci.org/nixheads/nixupdater.png
 
-Designed for use on the [Linux Lite](https://linuxliteos.com) Distro .
 This is a tool that checks apt for updates and notify's the user accordingly.
 It does this by updating the cache based on a timer the user can select in the config tool.
 

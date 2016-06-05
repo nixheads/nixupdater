@@ -52,7 +52,7 @@ def get_global_config():
     config = []
     try:
         for line in open(os.path.expanduser("~") + '/.config' +
-                         '/lite-updater.conf'):
+                         '/nixupdater.conf'):
             line = line.rstrip()
             config.append(line)
     except:
@@ -65,7 +65,7 @@ class Autostart(object):
         config_autostart_path = os.getenv("HOME") + "/.config/autostart/"
         if not os.path.exists(config_autostart_path):
             os.makedirs(config_autostart_path)
-        return config_autostart_path + "lite-updater.desktop"
+        return config_autostart_path + "nixupdater.desktop"
 
     def is_installed(self):
         return os.path.exists(self.user_autostart_path())
@@ -74,11 +74,11 @@ class Autostart(object):
         with open(self.user_autostart_path(), "w") as desktop_file:
             desktop_file.write("""[Desktop Entry]
 Type=Application
-Version=0.1
+Version=1.0
 Name=Lite-Updater
-GenericName=Lite-Updater
-Comment=Linux Lite Update Checker
-Exec=/usr/bin/lite-updater
+GenericName=Nix Updater
+Comment=Linux Update Checker
+Exec=/usr/bin/nixupdater
 Terminal=false
 Categories=GTK;Utility;
 StartupNotify=true""")
@@ -121,7 +121,7 @@ class Liteupdater:
 
     def update_cache(self, foo=None):
         self.set_state('working')
-        cmd = "/usr/share/lite-updater/lite-cache-check.py"
+        cmd = "/usr/share/nixupdater/nix-cache-check.py"
         process = Popen(shlex.split(cmd), stdout=PIPE)
         process.communicate()
         self.update()
@@ -152,7 +152,7 @@ class Liteupdater:
         def default(self):
             config = ["1800", "3600", "3000", "True"]
             configfile = open(
-                os.path.expanduser("~") + '/.config' + '/lite-updater.conf',
+                os.path.expanduser("~") + '/.config' + '/nixupdater.conf',
                 "w")
             for item in config:
                 configfile.write("%s\n" % item)
@@ -172,7 +172,7 @@ class Liteupdater:
             config[2] = dseconds * 1000
             config[3] = check.get_active()
             configfile = open(
-                os.path.expanduser("~") + '/.config' + '/lite-updater.conf',
+                os.path.expanduser("~") + '/.config' + '/nixupdater.conf',
                 "w")
             for item in config:
                 configfile.write("%s\n" % item)
@@ -350,11 +350,11 @@ class Liteupdater:
         about_dialog.set_name(appname)
         about_dialog.set_comments('A simple, lite update checker'
                                   ' for your tray.')
-        about_dialog.set_website('https://www.linuxliteos.com')
+        about_dialog.set_website('https://github.com/nixheads/nixupdater')
         about_dialog.set_website_label('Website')
         about_dialog.set_icon(gdk.pixbuf_new_from_file(upgrade_icon))
         about_dialog.set_logo(gdk.pixbuf_new_from_file(logo))
-        about_dialog.set_copyright('Copyright Linux Lite 2016')
+        about_dialog.set_copyright('Copyright Johnathan Jenkins 2016')
         about_dialog.set_version(appver)
         about_dialog.set_authors(['Johnathan "ShaggyTwoDope" Jenkins'])
         about_dialog.set_wrap_license
@@ -437,11 +437,11 @@ MA 02110-1301, USA. ''')
 if __name__ == "__main__":
     appname = 'Lite Updater'
     appver = '1.0-0100'
-    iconpath = '/usr/share/lite-updater/icons/'
+    iconpath = '/usr/share/nixupdater/icons/'
     inactive_icon = iconpath + 'updates-idle.png'
     working_icon = iconpath + 'aptdaemon-working.png'
     upgrade_icon = iconpath + 'updates-available.png'
-    logo = iconpath + 'lite_logo.png'
+    logo = iconpath + 'nix_logo.png'
     fl = 0
     app = Liteupdater()
     try:

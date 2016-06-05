@@ -1,5 +1,2 @@
-Changes for 1.0-0100:
+Changes for 1.0:
 - Official stable release.
-- Menu items renamed
-- When updates are spawned (left click or menu item) no prompt is given only password
-- General code clean ups from previous releases.
