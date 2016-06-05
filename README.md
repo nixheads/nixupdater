@@ -7,11 +7,6 @@ This is a tool that checks apt for updates and notify's the user accordingly.
 It does this by updating the cache based on a timer the user can select in the config tool.
 
 
-
-![](http://i.imgur.com/XkhMwV3.png)
-
-![](http://i.imgur.com/9S1mCKc.png)
-
 ## License ![License](https://img.shields.io/badge/license-GPLv2-green.svg)
 
 This project is under the GPLv2 license.
