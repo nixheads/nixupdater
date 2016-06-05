@@ -16,7 +16,7 @@ deb:
 	install -m 644 usr/share/applications/nixupdater.desktop debian/usr/share/applications/nixupdater.desktop
 	install -m 644 usr/share/pixmaps/nixupdater.png debian/usr/share/pixmaps/nixupdater.png
 	install -m 644 usr/share/nixupdater/nixupdater.py debian/usr/share/nixupdater/nixupdater.py
-	install -m 644 usr/share/nixupdater/nix-cache-check.py debian/usr/share/nixupdater/nix-cache-check.py
+	install -m 755 usr/share/nixupdater/nix-cache-check.py debian/usr/share/nixupdater/nix-cache-check.py
 	install -m 644 usr/share/nixupdater/icons/* debian/usr/share/nixupdater/icons
 
 

@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Johnathan Jenkins <twodopeshaggy@gmail.com>
 Homepage: http://github.com/nixheads/nixupdater
 Package: nixupdater
-Version: 1.0.1
+Version: 1.0.0
 Architecture: all
 Depends: python-apt, python-gtk2, python-pyinotify, python-notify2,  gnome-packagekit, python-aptdaemon
 Description: Nix Updater

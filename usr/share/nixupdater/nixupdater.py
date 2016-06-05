@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # vim:fenc=utf-8
 #
@@ -75,7 +75,7 @@ class Autostart(object):
             desktop_file.write("""[Desktop Entry]
 Type=Application
 Version=1.0
-Name=Lite-Updater
+Name=Nix Updater
 GenericName=Nix Updater
 Comment=Linux Update Checker
 Exec=/usr/bin/nixupdater
@@ -105,12 +105,12 @@ def checkcount():
     gc.collect()
 
 
-class Liteupdater:
+class Nixupdater:
     def __init__(self):
         self.config = get_global_config()
         self.icon = gtk.status_icon_new_from_file(inactive_icon)
         self.icon.set_tooltip("Idle")
-        notify2.init("Lite-updater")
+        notify2.init("Nix Updater")
         self.icon.set_visible(True)
         self.update_running = False
         self.notifier = None
@@ -435,15 +435,15 @@ MA 02110-1301, USA. ''')
 
 
 if __name__ == "__main__":
-    appname = 'Lite Updater'
-    appver = '1.0-0100'
+    appname = 'Nix Updater'
+    appver = '1.0.0'
     iconpath = '/usr/share/nixupdater/icons/'
     inactive_icon = iconpath + 'updates-idle.png'
     working_icon = iconpath + 'aptdaemon-working.png'
     upgrade_icon = iconpath + 'updates-available.png'
     logo = iconpath + 'nix_logo.png'
     fl = 0
-    app = Liteupdater()
+    app = Nixupdater()
     try:
         run_check()
         app.main()
